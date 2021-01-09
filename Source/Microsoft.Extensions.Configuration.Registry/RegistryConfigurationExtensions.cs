@@ -1,11 +1,11 @@
-﻿namespace Microsoft.Extensions.Configuration.Registry
+namespace Microsoft.Extensions.Configuration.Registry
 {
     using System;
 
     public static class RegistryConfigurationExtensions
     {
         /// <summary>
-        ///     Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        ///     Adds the JSON configuration provider at <paramref name="keyPath"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">
         ///     The <see cref="IConfigurationBuilder"/> to add to.
@@ -32,7 +32,7 @@
         }
 
         /// <summary>
-        ///     Adds the JSON configuration provider at <paramref name="path"/> to <paramref name="builder"/>.
+        ///     Adds the JSON configuration provider at <paramref name="keyPath"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">
         ///     The <see cref="IConfigurationBuilder"/> to add to.
@@ -40,7 +40,7 @@
         /// <param name="keyPath">
         ///     Path relative to the base path stored in <see cref="IConfigurationBuilder.Properties"/>
         ///     of <paramref name="builder"/>.
-        /// </param>        /// 
+        /// </param>        ///
         /// <param name="registry">
         ///     A top level system key as <see cref="Win32.RegistryKey"/>
         /// </param>
