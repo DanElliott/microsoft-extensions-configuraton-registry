@@ -1,5 +1,12 @@
 {
   "version": 1,
   "isRoot": true,
-  "tools": {}
+  "tools": {
+    "cake.tool": {
+      "version": "1.0.0-rc0001",
+      "commands": [
+        "dotnet-cake"
+      ]
+    }
+  }
 }
