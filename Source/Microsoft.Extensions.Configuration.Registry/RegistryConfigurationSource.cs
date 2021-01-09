@@ -1,8 +1,8 @@
-﻿namespace Microsoft.Extensions.Configuration.Registry
+namespace Microsoft.Extensions.Configuration.Registry
 {
+    using System;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Win32;
-    using System;
 
     public class RegistryConfigurationSource : IConfigurationSource
     {
@@ -13,8 +13,10 @@
         }
 
         public string KeyPath { get; set; }
+
         public Func<RegistryKey> Registry { get; set; }
 
+        /// <inheritdoc/>
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {
             return new RegistryConfigurationProvider(this);

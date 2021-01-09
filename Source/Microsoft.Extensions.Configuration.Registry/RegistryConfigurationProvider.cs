@@ -1,9 +1,9 @@
-﻿namespace Microsoft.Extensions.Configuration.Registry
+namespace Microsoft.Extensions.Configuration.Registry
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.Win32;
 
     public class RegistryConfigurationProvider : ConfigurationProvider
     {
@@ -14,6 +14,7 @@
             this.source = source ?? throw new ArgumentNullException(nameof(source));
         }
 
+        /// <inheritdoc/>
         public override void Load()
         {
             var registry = this.source.Registry.Invoke();
@@ -36,7 +37,7 @@
 
             try
             {
-                ParseKeyValuePairs(subKey, data, stack);
+                this.ParseKeyValuePairs(subKey, data, stack);
             }
             finally
             {
@@ -72,20 +73,21 @@
 
                 using (var subkey = subKey.OpenSubKey(subkeyName))
                 {
-                    ParseKeyValuePairs(subkey, data, stack);
+                    this.ParseKeyValuePairs(subkey, data, stack);
                 }
 
-                stack.Pop();
+                _ = stack.Pop();
             }
 
-            foreach (var valueName in subKey.GetValueNames())
+            foreach (string? valueName in subKey.GetValueNames())
             {
                 stack.Push(valueName.Replace(".", string.Empty));
 
-                string key = ConfigurationPath.Combine(stack.Reverse());
-                data[key] = subKey.TryGetValue(valueName);
+                string? key = ConfigurationPath.Combine(stack.Reverse());
+                string? value = subKey.TryGetValue(valueName);
+                data[key] = value ?? string.Empty;
 
-                stack.Pop();
+                _ = stack.Pop();
             }
         }
     }

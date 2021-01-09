@@ -1,8 +1,8 @@
 namespace Microsoft.Extensions.Configuration.Registry.Tests
 {
-    using Microsoft.Extensions.Configuration;
     using System;
     using System.IO;
+    using Microsoft.Extensions.Configuration;
     using Xunit;
 
     public class RegistryConfigurationExtensionsTests
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.Configuration.Registry.Tests
             var ex = Assert.Throws<ArgumentException>(() => configurationBuilder.AddRegistrySettings(path));
             Assert.Equal(expected: "keyPath", actual: ex.ParamName);
             Assert.StartsWith(
-                expectedStartString: "Key path must be a non-empty string.", 
+                expectedStartString: "Key path must be a non-empty string.",
                 actualString: ex.Message);
         }
 
